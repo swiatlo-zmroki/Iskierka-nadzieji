@@ -6,16 +6,18 @@
   <title>Od Dna do Światła</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* Twoje oryginalne, pulsujące style */
     body {
       background-image: url('tlo.jpg'); 
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
       min-height: 100vh;
-      color: white;
-      text-align: center;
       font-family: sans-serif;
+      color: #fff;
+      text-align: center;
     }
+
     h1 {
       font-size: 3.5em;
       text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #d32f2f, 0 0 80px #d32f2f;
@@ -23,9 +25,14 @@
       animation: pulse-red 2s infinite alternate;
       margin-top: 40px;
     }
+
     @keyframes pulse-red {
-      from { text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 15px #ff4d4d, 0 0 20px #d32f2f, 0 0 35px #d32f2f; }
-      to { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #b71c1c, 0 0 70px #b71c1c; }
+      from {
+        text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 15px #ff4d4d, 0 0 20px #d32f2f, 0 0 35px #d32f2f;
+      }
+      to {
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #b71c1c, 0 0 70px #b71c1c;
+      }
     }
     .scrolling-subtitle-container { width: 100%; overflow: hidden; background-color: rgba(0, 0, 0, 0.6); padding: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
     .special-subtitle { font-size: 1.5em; font-weight: bold; color: #ffd700; text-shadow: 1px 1px 2px #000; white-space: nowrap; display: inline-block; padding-left: 100%; animation: scroll-text 25s linear infinite; }
