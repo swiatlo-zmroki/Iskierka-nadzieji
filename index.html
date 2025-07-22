@@ -16,7 +16,17 @@
       text-align: center;
       font-family: sans-serif;
     }
-    h1 { font-size: 2.5em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+    h1 {
+      font-size: 3.5em;
+      text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #d32f2f, 0 0 80px #d32f2f;
+      color: #fff;
+      animation: pulse-red 2s infinite alternate;
+      margin-top: 40px;
+    }
+    @keyframes pulse-red {
+      from { text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 15px #ff4d4d, 0 0 20px #d32f2f, 0 0 35px #d32f2f; }
+      to { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #b71c1c, 0 0 70px #b71c1c; }
+    }
     .scrolling-subtitle-container { width: 100%; overflow: hidden; background-color: rgba(0, 0, 0, 0.6); padding: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
     .special-subtitle { font-size: 1.5em; font-weight: bold; color: #ffd700; text-shadow: 1px 1px 2px #000; white-space: nowrap; display: inline-block; padding-left: 100%; animation: scroll-text 25s linear infinite; }
     @keyframes scroll-text { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
@@ -94,4 +104,3 @@
   </script>
 </body>
 </html>
-
