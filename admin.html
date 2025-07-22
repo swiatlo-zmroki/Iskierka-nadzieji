@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -28,10 +27,10 @@
         <h1>Panel Zarządzania Treścią</h1>
         <p>Witaj w swoim warsztacie. Tutaj możesz tworzyć i zarządzać całą zawartością strony.</p>
         <div class="form-section">
-            <h2>Zarządzaj Menu (Sekcjami)</h2>
+            <h2>Zarządzaj Menu (Sekcjami Dynamicznymi)</h2>
             <label for="newSectionName">Nazwa nowej sekcji:</label>
             <input type="text" id="newSectionName" placeholder="Np. Wiersze, Opowieści...">
-            <button onclick="addSection()">Dodaj nową sekcję</button>
+            <button onclick="addSection()">Dodaj nową sekcję dynamiczną</button>
         </div>
         <div class="form-section">
             <h2>Dodaj nowy wpis</h2>
@@ -69,18 +68,21 @@
         async function loadSections() {
             try {
                 const response = await fetch('/api/sections');
-                if (!response.ok) throw new Error('Nie udało się pobrać sekcji.');
-                const sections = await response.json();
+                if (!response.ok) throw new Error('Nie udało się pobrać sekcji dynamicznych.');
+                const dynamicSections = await response.json();
                 
                 entrySectionSelect.innerHTML = '';
                 viewSectionSelect.innerHTML = '';
                 
-                const defaultOptions = [
-                    { name: 'Iskierki', slug: 'iskierki' },
-                    { name: 'Piciorys', slug: 'piciorys' },
+                const staticSections = [
+                    { name: 'Iskierki (dodawanie)', slug: 'iskierki' },
+                    { name: 'Piciorys (dodawanie)', slug: 'piciorys' },
+                    { name: 'Kronika (dodawanie)', slug: 'kronika' },
+                    { name: 'Opowieści (dodawanie)', slug: 'opowiesci' },
+                    { name: 'Pomoc (dodawanie)', slug: 'pomoc' }
                 ];
 
-                const allSections = [...defaultOptions, ...sections];
+                const allSections = [...staticSections, ...dynamicSections];
 
                 allSections.forEach(section => {
                     const option = `<option value="${section.slug}">${section.name}</option>`;
@@ -103,7 +105,7 @@
                     body: JSON.stringify({ name })
                 });
                 if (!response.ok) throw new Error('Błąd serwera przy dodawaniu sekcji.');
-                showStatus("Nowa sekcja została dodana!");
+                showStatus("Nowa sekcja dynamiczna została dodana!");
                 document.getElementById('newSectionName').value = '';
                 await loadSections();
             } catch (error) {
@@ -120,10 +122,10 @@
             if (!content) return showStatus("Treść wpisu nie może być pusta.", true);
 
             try {
-                const response = await fetch('/api/entries', {
+                const response = await fetch(`/api/entries?section=${section}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ section, title, author, content })
+                    body: JSON.stringify({ title, author, content })
                 });
                 if (!response.ok) throw new Error('Błąd serwera przy dodawaniu wpisu.');
                 showStatus(`Wpis został dodany do sekcji "${section}"!`);
@@ -138,6 +140,10 @@
 
         async function loadEntries() {
             const section = viewSectionSelect.value;
+            if (!section) {
+                entriesListDiv.innerHTML = '<p>Wybierz sekcję, aby zobaczyć wpisy.</p>';
+                return;
+            }
             entriesListDiv.innerHTML = '<p>Ładowanie wpisów...</p>';
             try {
                 const response = await fetch(`/api/entries?section=${section}`);
@@ -168,7 +174,7 @@
 
         async function editEntry(section, id) {
              const newContent = prompt("Edytuj treść wpisu:");
-             if (newContent === null || newContent.trim() === "") return;
+             if (newContent === null) return;
 
              try {
                 const response = await fetch(`/api/entries?id=${id}&section=${section}`, {
@@ -203,3 +209,4 @@
     </script>
 </body>
 </html>
+
