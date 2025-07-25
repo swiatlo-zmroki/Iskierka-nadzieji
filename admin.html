@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admina – Od Dna do Światła</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; color: #1c1e21; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { color: #d32f2f; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; }
+        .form-section { background-color: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], select, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        textarea { min-height: 200px; resize: vertical; font-size: 1.1em; }
+        button { background-color: #d32f2f; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; font-weight: bold; transition: background-color 0.3s; }
+        button:hover { background-color: #b71c1c; }
+        .button-secondary { background-color: #6c757d; }
+        .button-secondary:hover { background-color: #5a6268; }
+        #entriesList div { background: #e9ebee; padding: 10px; margin-bottom: 10px; border-radius: 5px; word-wrap: break-word; }
+        #entriesList button { font-size: 0.8em; padding: 5px 10px; margin-left: 10px; }
+        .status { padding: 10px; color: white; background: #28a745; border-radius: 5px; text-align: center; font-weight: bold; margin-top: 15px; display: none; }
+        .status.error { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Panel Zarządzania Treścią</h1>
+        <p>Witaj w swoim warsztacie, Architekcie.</p>
+        
+        <div class="form-section">
+            <h2>Dodaj nową sekcję do Menu</h2>
+            <label for="newSectionName">Nazwa nowej sekcji:</label>
+            <input type="text" id="newSectionName" placeholder="Np. Wiersze, Refleksje...">
+            <button onclick="addSection()">Dodaj sekcję</button>
+        </div>
+
+        <div class="form-section">
+            <h2>Dodaj nowy wpis</h2>
+            <label for="entrySection">Wybierz sekcję:</label>
+            <select id="entrySection"></select>
+            <label for="entryTitle">Tytuł wpisu:</label>
+            <input type="text" id="entryTitle" placeholder="Tytuł dla Kroniki, Opowieści itp.">
+            <label for="entryAuthor">Autor (opcjonalnie):</label>
+            <input type="text" id="entryAuthor" placeholder="Np. Chudy">
+            <label for="entryContent">Treść wpisu:</label>
+            <textarea id="entryContent" placeholder="Wpisz tutaj treść..."></textarea>
+            <button onclick="addEntry()">Zapisz nowy wpis</button>
+        </div>
+
+        <div class="form-section">
+            <h2>Przeglądaj / Edytuj Wpisy</h2>
+            <label for="viewSection">Wybierz sekcję do przejrzenia:</label>
+            <select id="viewSection" onchange="loadEntries()"></select>
+            <div id="entriesList"></div>
+        </div>
+
+        <div id="statusMessage" class="status"></div>
+    </div>
+    <script>
+        const entrySectionSelect = document.getElementById('entrySection');
+        const viewSectionSelect = document.getElementById('viewSection');
+        const entriesListDiv = document.getElementById('entriesList');
+        const statusMessage = document.getElementById('statusMessage');
+
+        function showStatus(message, isError = false) {
+            statusMessage.textContent = message;
+            statusMessage.className = isError ? 'status error' : 'status';
+            statusMessage.style.display = 'block';
+            setTimeout(() => { statusMessage.style.display = 'none'; }, 4000);
+        }
+
+        async function loadSections() {
+            try {
+                const response = await fetch('/api/sections');
+                if (!response.ok) throw new Error('Nie udało się pobrać sekcji.');
+                const dynamicSections = await response.json();
+                
+                entrySectionSelect.innerHTML = '';
+                viewSectionSelect.innerHTML = '';
+                
+                const staticSections = [
+                    { name: 'Iskierki', slug: 'iskierki' },
+                    { name: 'Piciorys', slug: 'piciorys' },
+                    { name: 'Kronika', slug: 'kronika' },
+                    { name: 'Opowieści', slug: 'opowiesci' },
+                    { name: 'Pomoc', slug: 'pomoc' }
+                ];
+
+                const allSections = [...staticSections, ...dynamicSections];
+
+                allSections.forEach(section => {
+                    const option = `<option value="${section.slug}">${section.name}</option>`;
+                    entrySectionSelect.innerHTML += option;
+                    viewSectionSelect.innerHTML += option;
+                });
+            } catch (error) {
+                showStatus("Błąd ładowania sekcji: " + error.message, true);
+            }
+        }
+
+        async function addSection() {
+            const name = document.getElementById('newSectionName').value.trim();
+            if (!name) return showStatus("Nazwa sekcji nie może być pusta.", true);
+
+            try {
+                const response = await fetch('/api/sections', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name })
+                });
+                if (!response.ok) throw new Error('Błąd serwera.');
+                showStatus("Nowa sekcja dynamiczna została dodana!");
+                document.getElementById('newSectionName').value = '';
+                await loadSections();
+            } catch (error) {
+                showStatus("Błąd: " + error.message, true);
+            }
+        }
+
+        async function addEntry() {
+            const section = entrySectionSelect.value;
+            const title = document.getElementById('entryTitle').value.trim();
+            const author = document.getElementById('entryAuthor').value.trim();
+            const content = document.getElementById('entryContent').value.trim();
+
+            if (!content) return showStatus("Treść wpisu nie może być pusta.", true);
+
+            try {
+                const response = await fetch(`/api/entries?section=${section}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, author, content })
+                });
+                if (!response.ok) throw new Error('Błąd serwera.');
+                showStatus(`Wpis został dodany!`);
+                document.getElementById('entryTitle').value = '';
+                document.getElementById('entryAuthor').value = '';
+                document.getElementById('entryContent').value = '';
+                if (section === viewSectionSelect.value) await loadEntries();
+            } catch (error) {
+                showStatus("Błąd: " + error.message, true);
+            }
+        }
+
+        async function loadEntries() {
+            const section = viewSectionSelect.value;
+            if (!section) {
+                entriesListDiv.innerHTML = '<p>Wybierz sekcję, aby zobaczyć wpisy.</p>';
+                return;
+            }
+            entriesListDiv.innerHTML = '<p>Ładowanie wpisów...</p>';
+            try {
+                const response = await fetch(`/api/entries?section=${section}`);
+                if (!response.ok) throw new Error('Nie udało się pobrać wpisów.');
+                const entries = await response.json();
+                
+                entriesListDiv.innerHTML = '';
+                if (entries.length === 0) {
+                    entriesListDiv.innerHTML = '<p>Brak wpisów w tej sekcji.</p>';
+                    return;
+                }
+                
+                entries.forEach(entry => {
+                    const entryDiv = document.createElement('div');
+                    const preview = entry.content.substring(0, 100) + '...';
+                    entryDiv.innerHTML = `
+                        <strong>${entry.title || 'Wpis bez tytułu'}</strong> (Autor: ${entry.author || 'Anonim'})<br>
+                        <em>${preview}</em>
+                        <button class="button-secondary" onclick="editEntry('${section}', '${entry.id}', \`${entry.content.replace(/`/g, '\\`')}\`)">Edytuj</button>
+                        <button class="button-secondary" style="background-color:#dc3545;" onclick="deleteEntry('${section}', '${entry.id}')">Usuń</button>
+                    `;
+                    entriesListDiv.appendChild(entryDiv);
+                });
+            } catch (error) {
+                entriesListDiv.innerHTML = `<p style="color:red;">Błąd ładowania wpisów: ${error.message}</p>`;
+            }
+        }
+
+        async function editEntry(section, id, currentContent) {
+             const newContent = prompt("Edytuj treść wpisu:", currentContent);
+             if (newContent === null) return;
+
+             try {
+                const response = await fetch(`/api/entries?id=${id}&section=${section}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: newContent.trim() })
+                });
+                if (!response.ok) throw new Error('Błąd serwera.');
+                showStatus("Wpis zaktualizowany!");
+                await loadEntries();
+             } catch(error) {
+                showStatus("Błąd: " + error.message, true);
+             }
+        }
+
+        async function deleteEntry(section, id) {
+            if (!confirm("Czy na pewno chcesz usunąć ten wpis? Tej operacji nie można cofnąć!")) return;
+            try {
+                const response = await fetch(`/api/entries?id=${id}&section=${section}`, { method: 'DELETE' });
+                if (!response.ok) throw new Error('Błąd serwera.');
+                showStatus("Wpis został usunięty.");
+                await loadEntries();
+            } catch(error) {
+                showStatus("Błąd: " + error.message, true);
+            }
+        }
+
+        window.onload = async () => {
+            await loadSections();
+            await loadEntries();
+        };
+    </script>
+</body>
+</html>
