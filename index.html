@@ -1,1 +1,150 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Od Dna do Światła</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Twoje oryginalne, pulsujące style - NIETKNIĘTE */
+    body {
+      background-image: url('tlo.jpg'); 
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      font-family: sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3.5em;
+      text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #d32f2f, 0 0 80px #d32f2f;
+      color: #fff;
+      animation: pulse-red 2s infinite alternate;
+      margin-top: 40px;
+    }
+    @keyframes pulse-red {
+      from { text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 15px #ff4d4d, 0 0 20px #d32f2f, 0 0 35px #d32f2f; }
+      to { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #b71c1c, 0 0 70px #b71c1c; }
+    }
+    .scrolling-subtitle-container { width: 100%; overflow: hidden; background-color: rgba(0, 0, 0, 0.6); padding: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+    .special-subtitle { font-size: 1.5em; font-weight: bold; color: #ffd700; text-shadow: 1px 1px 2px #000; white-space: nowrap; display: inline-block; padding-left: 100%; animation: scroll-text 25s linear infinite; }
+    @keyframes scroll-text { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+    nav ul { list-style-type: none; padding: 0; text-align: center; }
+    nav ul li { display: inline-block; margin: 10px; }
+    nav ul li a { display: block; padding: 12px 22px; font-weight: bold; color: #000; text-decoration: none; border-radius: 8px; background: linear-gradient(to bottom, #d32f2f, #b71c1c); border: 1px solid #7f0000; box-shadow: 0 4px 0 #7f0000, 0 5px 5px rgba(0,0,0,0.4); transition: all 0.1s ease-in-out; }
+    nav ul li a:hover { background: linear-gradient(to bottom, #e57373, #d32f2f); }
+    nav ul li a:active { transform: translateY(2px); box-shadow: 0 2px 0 #7f0000, 0 3px 3px rgba(0,0,0,0.4); }
+    .animated-warning, .spark-container { text-align: center; max-width: 900px; margin: 40px auto; background: rgba(0, 0, 0, 0.6); padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+    .animated-warning { border: 2px solid #ffd700; animation: softPulse 6s infinite ease-in-out; }
+    .animated-warning p { font-family: 'Georgia', serif; font-size: 1.4em; font-weight: bold; color: #fffacd; text-shadow: 0 0 6px rgba(255, 215, 0, 0.7); margin: 0; line-height: 1.6; }
+    @keyframes softPulse { 0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); } 50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.7); } }
+    .spark-text { font-size: 1.5em; font-weight: bold; color: #ffd700; text-shadow: 0 0 10px #fff59d, 0 0 20px #fff176; animation: flicker 2s infinite; min-height: 80px; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; padding: 0 20px; }
+    .spark-button { margin-top: 20px; padding: 10px 20px; background: #ff9800; color: #fff; font-weight: bold; border: none; border-radius: 25px; cursor: pointer; transition: background 0.3s; }
+    .spark-button:hover { background: #e65100; }
+    @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    .comments-section { padding: 20px; margin-top: 30px; background-color: #f9f9f9; border-top: 1px solid #ddd; color: #333; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Od Dna do Światła</h1>
+    <div class="scrolling-subtitle-container">
+      <p class="special-subtitle">To miejsce dla ubrudzonych życiem – i dla tych, którzy szukają światła</p>
+    </div>
+  </header>
+
+  <nav>
+    <ul id="main-menu">
+      <li><a href="piciorys.html">Piciorys Chudego</a></li>
+      <li><a href="ksiezniczka.html">Z punktu widzenia księżniczki</a></li>
+      <li><a href="choroba.html">Czym jest choroba alkoholowa</a></li>
+      <li><a href="pomoc.html">Pomoc</a></li>
+      <li><a href="kronika.html">Kronika</a></li>
+      <li><a href="opowiesci.html">Opowieści</a></li>
+      <li><a href="galeria.html">Galeria</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="animated-warning">
+      <p>„Drodzy rodzice, jeśli wy zaniedbacie i nie nauczycie swoich dzieci, czym i po co są uczucia, jak je przeżywać i radzić sobie z nimi, zrobi to alkohol – bezlitośnie i bez skrupułów.”</p>
+    </div>
+    <div class="spark-container">
+      <div id="sparkText" class="spark-text">Ładowanie iskierki...</div>
+      <button class="spark-button" onclick="changeSpark()">💫 Daj kolejną iskrę</button>
+    </div>
+    <section id="comments" class="comments-section">
+      <h2>Podziel się swoją historią lub wesprzyj innych</h2>
+      <p>Twoje doświadczenie ma znaczenie. Anonimowo lub nie – każde słowo wsparcia jest bezcenne.</p>
+      <div id="disqus_thread"></div>
+    </section>
+  </main>
+
+  <audio autoplay loop controls>
+    <source src="jestes-moim-aniolem.mp3" type="audio/mpeg">
+    Twoja przeglądarka nie obsługuje odtwarzacza audio.
+  </audio>
+
+  <footer>
+    <p>© 2025 Od Dna do Światła</p>
+    <p>Autor: Chudy | Kontakt: Asatro@interia.pl</p>
+  </footer>
+  
+  <script>
+    // --- NOWA, CZYSTA LOGIKA POŁĄCZONA Z VERCEL ---
+    let sparks = [];
+    const sparkText = document.getElementById("sparkText");
+
+    async function fetchSparks() {
+        try {
+            // Pytamy naszego "pomocnika" o listę iskierek
+            const response = await fetch('/api/entries?section=iskierki');
+            if (!response.ok) throw new Error('Błąd sieci');
+            const entries = await response.json();
+            sparks = entries.map(entry => entry.content); // Wyciągamy samą treść iskierek
+            
+            if (sparks.length === 0) {
+                 sparkText.innerText = "Dodaj pierwszą iskierkę w panelu admina.";
+            } else {
+                changeSpark(); // Losujemy pierwszą iskierkę
+            }
+        } catch (error) {
+            console.error("Błąd ładowania iskierek:", error);
+            sparkText.innerText = "Błąd ładowania iskierek z bazy.";
+        }
+    }
+
+    function changeSpark() {
+      if (sparks.length === 0) return;
+      const current = sparkText.innerText;
+      let newSpark;
+      do {
+        newSpark = sparks[Math.floor(Math.random() * sparks.length)];
+      } while (sparks.length > 1 && newSpark === current);
+      
+      sparkText.style.opacity = 0;
+      setTimeout(() => {
+        sparkText.innerText = newSpark;
+        sparkText.style.opacity = 1;
+      }, 300);
+    }
+    
+    // Disqus - NIETKNIĘTY
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://od-dna-do-swiatla.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+
+    // Inicjalizacja po załadowaniu strony
+    window.addEventListener('load', () => {
+        fetchSparks();
+        setInterval(changeSpark, 30000);
+    });
+  </script>
+</body>
+</html>
 
