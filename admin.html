@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admina – Od Dna do Światła</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; color: #1c1e21; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { color: #d32f2f; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; }
+        .form-section { background-color: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], select, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        textarea { min-height: 200px; resize: vertical; font-size: 1.2em; }
+        button { background-color: #d32f2f; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; font-weight: bold; transition: background-color 0.3s; }
+        button:hover { background-color: #b71c1c; }
+        .status { padding: 10px; color: white; background: #28a745; border-radius: 5px; text-align: center; font-weight: bold; margin-top: 15px; display: none; }
+        .status.error { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Panel Zarządzania Treścią</h1>
+        <p>Witaj w swoim warsztacie, Architekcie.</p>
+        
+        <div class="form-section">
+            <h2>Dodaj nową sekcję do Menu</h2>
+            <label for="newSectionName">Nazwa nowej sekcji:</label>
+            <input type="text" id="newSectionName" placeholder="Np. Wiersze, Refleksje...">
+            <button onclick="addSection()">Dodaj sekcję</button>
+        </div>
+
+        <div class="form-section">
+            <h2>Dodaj nowy wpis</h2>
+            <label for="entrySection">Wybierz sekcję:</label>
+            <select id="entrySection"></select>
+            <label for="entryTitle">Tytuł wpisu:</label>
+            <input type="text" id="entryTitle" placeholder="Tytuł dla Kroniki, Opowieści itp.">
+            <label for="entryAuthor">Autor (opcjonalnie):</label>
+            <input type="text" id="entryAuthor" placeholder="Np. Chudy">
+            <label for="entryContent">Treść wpisu:</label>
+            <textarea id="entryContent" placeholder="Wpisz tutaj treść..."></textarea>
+            <button onclick="addEntry()">Zapisz nowy wpis</button>
+        </div>
+
+        <div class="form-section">
+            <h2>Przeglądaj / Edytuj Wpisy</h2>
+            <label for="viewSection">Wybierz sekcję do przejrzenia:</label>
+            <select id="viewSection" onchange="loadEntries()"></select>
+            <div id="entriesList"></div>
+        </div>
+
+        <div id="statusMessage" class="status"></div>
+    </div>
+    <script>
+        // Logika zostanie dodana, gdy odbudujemy silnik w /api
+    </script>
+</body>
+</html>
 
