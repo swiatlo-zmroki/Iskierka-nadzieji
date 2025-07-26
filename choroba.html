@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Czym jest choroba alkoholowa - Od Dna do Światła</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .content-container { max-width: 900px; margin: 20px auto; padding: 25px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .content-container h2 { font-size: 1.8em; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+    .content-container h3 { font-size: 1.4em; color: #0056b3; }
+    .content-container p, .content-container li { font-size: 1.1em; line-height: 1.7; text-align: justify; }
+    .speak-button-container { text-align: right; margin-top: 20px; }
+    .speak-button {
+      display: inline-flex; align-items: center; gap: 10px; padding: 10px 15px; font-size: 1em;
+      font-weight: bold; color: #fff; background-color: #28a745; border: none;
+      border-radius: 25px; cursor: pointer;
+    }
+    .speak-button .icon { font-size: 1.3em; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Czym jest choroba alkoholowa?</h1>
+    <a href="index.html" class="back-to-home-button">⟵ Powrót</a>
+  </header>
+
+  <main>
+    <div class="content-container">
+    
+      <div id="section-1">
+        <h2>Definicja i Podstępny Początek</h2>
+        <p>Choroba alkoholowa, czyli uzależnienie od alkoholu, to przewlekła, postępująca i śmiertelna choroba. Nie jest to kwestia słabej woli czy braku moralności. To choroba mózgu i duszy, która całkowicie zmienia sposób myślenia, odczuwania i zachowania.</p>
+        <p>Zaczyna się niewinnie. Picie towarzyskie, piwo po pracy, drink dla relaksu. Alkohol staje się "przyjacielem", który pomaga na stres, smutek i samotność. Człowiek zaczyna szukać okazji do picia, a picie staje się sposobem na życie, a nie dodatkiem do niego. To jest moment, w którym tracisz kontrolę, choć jesteś ostatnią osobą, która to przyzna.</p>
+      </div>
+      <div class="speak-button-container"><button id="speakBtn1" class="speak-button">▶️ Odsłuchaj</button></div>
+
+      <hr>
+
+      <div id="section-2">
+        <h3>Fazy Choroby Alkoholowej</h3>
+        <p>Specjaliści wyróżniają zazwyczaj cztery fazy choroby:</p>
+        <ol>
+          <li><strong>Faza wstępna (prealkoholowa):</strong> Picie dla poprawy nastroju, szukanie ulgi. Rośnie tolerancja na alkohol – trzeba wypić więcej, żeby poczuć ten sam efekt.</li>
+          <li><strong>Faza ostrzegawcza:</strong> Pojawiają się pierwsze "bury" i luki w pamięci (tzw. "urwany film"). Człowiek zaczyna pić w samotności, w ukryciu. Alkohol staje się obsesją.</li>
+          <li><strong>Faza krytyczna (ostra):</strong> Całkowita utrata kontroli nad piciem. Picie w ciągach. Zaniedbywanie rodziny, pracy, obowiązków. Pojawiają się pierwsze poważne konsekwencje zdrowotne, prawne i społeczne.</li>
+          <li><strong>Faza przewlekła (chroniczna):</strong> Picie staje się jedynym celem życia. Degradacja fizyczna, psychiczna i duchowa. Długotrwałe ciągi alkoholowe. Bez pomocy z zewnątrz, ta faza często kończy się śmiercią.</li>
+        </ol>
+      </div>
+      <div class="speak-button-container"><button id="speakBtn2" class="speak-button">▶️ Odsłuchaj</button></div>
+
+      <hr>
+
+      <div id="section-3">
+        <h3>Dlaczego tak trudno przestać?</h3>
+        <p>To nie jest tylko kwestia "wzięcia się w garść". Alkohol zmienia chemię mózgu, tworząc potężny przymus picia (głód alkoholowy). Poza tym działają mechanizmy obronne choroby, takie jak system zaprzeczeń ("nie mam problemu"), obwinianie innych czy minimalizowanie skali picia. Te mechanizmy tworzą mur, przez który bardzo trudno się przebić.</p>
+      </div>
+      <div class="speak-button-container"><button id="speakBtn3" class="speak-button">▶️ Odsłuchaj</button></div>
+
+      <hr>
+      <div id="section-4">
+        <h3>Choroba Duszy i Emocji</h3>
+        <p>Alkoholizm rzadko kiedy jest tylko problemem fizycznego przymusu. W jego sercu leży głęboki ból emocjonalny. Alkohol staje się lekarstwem – ale lekarstwem, które jest trucizną. To próba znieczulenia uczuć, z którymi nie potrafimy sobie poradzić: lęku, wstydu, poczucia winy, samotności, niskiej samooceny czy traum z przeszłości.</p>
+        <p>Uzależnienie to choroba utraconych relacji. Nie tylko z innymi ludźmi, ale przede wszystkim z samym sobą. Człowiek gubi kontakt ze swoimi prawdziwymi uczuciami, pragnieniami i wartościami. Zaczyna żyć w świecie iluzji, którą buduje alkohol, a jego prawdziwe "ja" zostaje zamknięte gdzieś głęboko, pod warstwami kłamstw i zaprzeczeń.</p>
+        <p>Dlatego właśnie terapia to nie tylko odstawienie alkoholu. To przede wszystkim długa i trudna podróż w głąb siebie. To nauka, jak na nowo czuć, jak radzić sobie z emocjami bez "znieczulacza". To odbudowywanie szacunku do samego siebie i odnajdywanie swojego prawdziwego, trzeźwego "ja". To jest właśnie leczenie duszy.</p>
+      </div>
+      <div class="speak-button-container"><button id="speakBtn4" class="speak-button">▶️ Odsłuchaj</button></div>
+
+    </div>
+  </main>
+
+  <script>
+    function createLector(buttonId, textElementId) {
+        const btn = document.getElementById(buttonId);
+        if (!btn) return;
+        const textElement = document.getElementById(textElementId);
+        if (!textElement) return;
+        const fullText = textElement.innerText;
+        let sentences = fullText.match(/[^.!?]+[.!?]?/g) || [fullText];
+        let currentIndex = 0;
+        let isReading = false;
+        function readSentence(i) {
+            if (!isReading || i >= sentences.length) {
+                btn.textContent = `▶️ Odsłuchaj`;
+                currentIndex = 0;
+                isReading = false;
+                window.speechSynthesis.cancel();
+                return;
+            }
+            const utterance = new SpeechSynthesisUtterance(sentences[i].trim());
+            utterance.lang = "pl-PL";
+            utterance.onend = () => { if (isReading) { currentIndex++; readSentence(currentIndex); } };
+            window.speechSynthesis.speak(utterance);
+        }
+        btn.addEventListener("click", () => {
+            const synth = window.speechSynthesis;
+            if (isReading) {
+                isReading = false;
+                synth.cancel();
+                btn.textContent = `🔄 Wznów`;
+            } else {
+                isReading = true;
+                btn.textContent = `⏸️ Pauza`;
+                readSentence(currentIndex);
+            }
+        });
+    }
+    createLector("speakBtn1", "section-1");
+    createLector("speakBtn2", "section-2");
+    createLector("speakBtn3", "section-3");
+    createLector("speakBtn4", "section-4");
+  </script>
+</body>
+</html>

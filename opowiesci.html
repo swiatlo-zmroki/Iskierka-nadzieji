@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kronika – Od Dna do Światła</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+    header {
+      text-align: center;
+      padding: 30px 10px;
+    }
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    .back-to-home-button {
+      color: #7fffd4;
+      text-decoration: none;
+      font-size: 1.2em;
+      border: 2px solid #7fffd4;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    .back-to-home-button:hover {
+      background-color: #7fffd4;
+      color: #0f2027;
+    }
+    .story-container {
+      max-width: 900px;
+      margin: 20px auto;
+    }
+    .story-item {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .story-item h2, .story-item h1, .story-item h3 {
+      color: #ffcc70;
+    }
+    .story-item p {
+      font-size: 1.1em;
+      line-height: 1.8;
+    }
+    .speak-button-container {
+      text-align: right;
+      margin-top: 20px;
+    }
+    .speak-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 15px;
+      font-size: 1em;
+      font-weight: bold;
+      color: #000;
+      background-color: #00ffcc;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .speak-button:hover {
+      background-color: #00ccaa;
+    }
+    blockquote {
+      font-style: italic;
+      color: #aad9ff;
+      margin: 15px 0;
+      padding-left: 20px;
+      border-left: 3px solid #aad9ff;
+    }
+    .author {
+      font-style: italic;
+      font-size: 0.9em;
+      color: #ccc;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Opowieści</h1>
+    <a href="index.html" class="back-to-home-button">⟵ Powrót</a>
+  </header>
+  <main>
+    <div class="story-container" id="storyContainer"></div>
+  </main>
+  <script>
+    const stories = [
+      {
+        id: 1,
+        title: "✊ Człowieku, który zgubił światło",
+        author: "Chudy",
+        text: `Dawno, dawno temu – choć wcale nie tak dawno – był człowiek, który zapomniał, kim jest. Gonił za światem zrobionym z plastiku i ekranów. Jego dusza była zardzewiała, a serce pokryte kurzem.
+Nie wiedział, że gdzieś w nim nadal tli się iskra. Zgaszona, przytłumiona… ale nie martwa. Pewnej nocy, gdy był najbliżej dna, usłyszał szept. Nie z zewnątrz – z wnętrza.
+– Pamiętasz, kim byłeś, zanim cię złamali?
+To pytanie nie dało mu spokoju. Zaczął grzebać w sobie jak w ruinach po pożarze. Odsłaniał cegły wstydu, rozbierał ściany strachu. Aż dotarł do serca – osmalonego, ale bijącego.
+I wtedy zrozumiał. Nie musi być idealny. Musi być prawdziwy. I to wystarczy, by zapłonąć od nowa.`
+      },
+      {
+        id: 2,
+        title: "O Latarniku, który zapomniał o świetle",
+        author: "Chudy",
+        text: `Był sobie kiedyś Latarnik, który mieszkał w latarni na końcu świata. Każdej nocy zapalał światło, by statki nie rozbijały się o skały. Ale z czasem przestał wierzyć, że ma to sens.
+Morze milczało. Statków nie było. Więc Latarnik przestał zapalać latarnię.
+Pewnej nocy przyszła burza. I roztrzaskała się łódź o skały.
+Na brzegu leżał rozbitek. Ledwo żywy. I zapytał: „Dlaczego światło nie świeciło?”
+Latarnik nie miał odpowiedzi. Ale tamtej nocy zapalił latarnię znowu. I już nigdy nie przestał.`
+      },
+      {
+        id: 3,
+        title: "„Noc, w której prawie się skończyłem”",
+        author: "Chudy",
+        text: `Pamiętam tę noc. Nie przez ilość wypitych butelek. Przez ciszę. Przez to, że nikt nie zauważył, że odchodzę. Nawet ja.
+Siedziałem na krawędzi łóżka, patrząc w pustkę. Aż telefon zawibrował.
+– Stary, jesteś? Śniłeś mi się. Żyjesz?
+Nie wiem, dlaczego wtedy odpisałem. Ale odpisałem. I to wystarczyło, by przetrwać tę noc.
+Czasem ratuje nas nie wielki cud. Tylko jedno powiadomienie. Jeden impuls, by nie zgasnąć.`
+      },
+      {
+        id: 4,
+        title: "Wilk, który bał się wyć",
+        author: "Chudy",
+        text: `Był sobie wilk, który nigdy nie wył. Urodził się w lesie pełnym echa, ale jego gardło znało tylko ciszę. Inne wilki wyły do księżyca, a on… tylko słuchał. Bał się, że jego głos będzie inny, słabszy, że ktoś się zaśmieje.
+Więc milczał. Aż zapomniał, że ma głos. Z czasem zaczął unikać pełni. Chowając się pod drzewami, udawał, że nie czuje jak serce mu bije, jakby chciało wybuchnąć.
+Aż któregoś dnia spotkał wilczycę z połamaną łapą. Leżała w śniegu, drżąca, bez nadziei. Spojrzała mu w oczy i szepnęła:
+– Zawyj… nie dla siebie. Dla mnie.
+I wtedy coś pękło. W gardle, w sercu, w duszy. Uniósł głowę i zawył. Niepewnie, ochryple, ale szczerze. Echo poniosło jego głos dalej niż kiedykolwiek.
+Wilczyca uśmiechnęła się. A on zrozumiał, że nie musiał być doskonały. Wystarczyło, że był prawdziwy.`
+      },
+      {
+        id: 5,
+        title: "Serce z rdzy",
+        author: "Chudy",
+        text: `W starym warsztacie mieszkał mechaniczny człowiek. Zbudowany z trybów, kabli i stali. Działał bez zarzutu, aż pewnego dnia coś w nim zgrzytnęło. Serce – małe, z miedzi – zaczęło rdzewieć.
+Nie bolało. Ale każdy dzień był bardziej szary. Przestał słyszeć muzykę śrub, zapach smaru, sens pracy. Wszystko było funkcją, nie uczuciem.
+Aż do dnia, gdy do warsztatu przyszło dziecko. Uśmiechnięte. Brudne. Z rozbitym zegarkiem.
+– Naprawisz mi go? To prezent od taty…
+Mechaniczny człowiek spojrzał w oczy dziecka. Zobaczył tam to, co kiedyś miał – coś, co nie było ani stalą, ani kablami. Coś żywego.
+Naprawił zegarek. A potem, bez słowa, otworzył własną klatkę piersiową. I wyjął serce. Pokryte rdzą, ale nadal bijące.
+Od tamtej pory serce znów rdzewiało… ale nie samotnie.`
+      }
+    ];
+
+    const container = document.getElementById('storyContainer');
+
+    stories.forEach(({ id, title, text, author }) => {
+      const div = document.createElement('div');
+      div.className = 'story-item';
+      div.innerHTML = `
+        <div id="opowiesc-${id}">
+          <h2>${title}</h2>
+          ${text
+            .split('\n')
+            .map(p => p.startsWith('–') ? `<blockquote>${p}</blockquote>` : `<p>${p}</p>`)
+            .join('')}
+          <p class="author">Autor: ${author}</p>
+        </div>
+        <div class="speak-button-container">
+          <button id="speakBtn${id}" class="speak-button">▶️ Odsłuchaj</button>
+        </div>
+      `;
+      container.appendChild(div);
+
+      const btn = document.getElementById(`speakBtn${id}`);
+      const textElement = document.getElementById(`opowiesc-${id}`);
+
+      if (btn && textElement) {
+        let sentences = (textElement.innerText || '').match(/[^.!?]+[.!?]?/g) || [];
+        let currentIndex = 0;
+        let isReading = false;
+
+        function readSentence(i) {
+          if (!isReading || i >= sentences.length) {
+            window.speechSynthesis.cancel();
+            btn.textContent = `▶️ Odsłuchaj`;
+            isReading = false;
+            currentIndex = 0;
+            return;
+          }
+          const utterance = new SpeechSynthesisUtterance(sentences[i].trim());
+          utterance.lang = 'pl-PL';
+          utterance.onend = () => {
+            if (isReading) {
+              currentIndex++;
+              readSentence(currentIndex);
+            }
+          };
+          window.speechSynthesis.speak(utterance);
+        }
+
+        btn.addEventListener('click', () => {
+          if (isReading) {
+            isReading = false;
+            window.speechSynthesis.cancel();
+            btn.textContent = `🔄 Wznów`;
+          } else {
+            isReading = true;
+            btn.textContent = `⏸️ Pauza`;
+            readSentence(currentIndex);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
