@@ -25,8 +25,13 @@ const loginError = document.getElementById('loginError');
 loginBtn.addEventListener('click', () => {
     loginError.textContent = '';
     auth.signInWithEmailAndPassword(emailInput.value, passwordInput.value)
+        .then(() => {
+            // Po udanym logowaniu auth.onAuthStateChanged się zajmie
+        })
         .catch(error => {
+            alert("Błędny email lub hasło. Spróbuj jeszcze raz.");
             loginError.textContent = "Błędny email lub hasło.";
+            console.error("Błąd logowania:", error);
         });
 });
 
@@ -189,21 +194,4 @@ function initializeAppLogic() {
     document.getElementById('addSparkBtn').addEventListener('click', addSpark);
     document.getElementById('addSongBtn').addEventListener('click', addSongToPlaylist);
 
-    adminPanel.addEventListener('click', (e) => {
-        if (e.target.matches('.delete-section-btn')) {
-            deleteSection(e.target.dataset.id, e.target.dataset.name);
-        }
-        if (e.target.matches('.delete-entry-btn')) {
-            deleteEntry(e.target.dataset.id);
-        }
-        if(e.target.matches('.delete-help-btn')){
-            deleteHelpPlace(e.target.dataset.id);
-        }
-    });
-
-    editSectionSelect.addEventListener('change', loadEntries);
-
-    // --- PIERWSZE ZAŁADOWANIE DANYCH ---
-    loadSections();
-    loadHelpPlaces();
-}
+    adminPanel.addEventListener('click',
