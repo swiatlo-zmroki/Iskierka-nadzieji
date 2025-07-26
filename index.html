@@ -1,1 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Od Dna do Światła</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background-image: url('tlo.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; font-family: sans-serif; color: #fff; text-align: center; }
+    h1 { font-size: 3.5em; text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #d32f2f, 0 0 80px #d32f2f; color: #fff; animation: pulse-red 2s infinite alternate; margin-top: 40px; }
+    @keyframes pulse-red { from { text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff4d4d, 0 0 15px #ff4d4d, 0 0 20px #d32f2f, 0 0 35px #d32f2f; } to { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #b71c1c, 0 0 70px #b71c1c; } }
+    .scrolling-subtitle-container { width: 100%; overflow: hidden; background-color: rgba(0, 0, 0, 0.6); padding: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+    .special-subtitle { font-size: 1.5em; font-weight: bold; color: #ffd700; text-shadow: 1px 1px 2px #000; white-space: nowrap; display: inline-block; padding-left: 100%; animation: scroll-text 25s linear infinite; }
+    @keyframes scroll-text { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+    nav ul { list-style-type: none; padding: 0; text-align: center; }
+    nav ul li { display: inline-block; margin: 10px; }
+    nav ul li a { display: block; padding: 12px 22px; font-weight: bold; color: #000; text-decoration: none; border-radius: 8px; background: linear-gradient(to bottom, #d32f2f, #b71c1c); border: 1px solid #7f0000; box-shadow: 0 4px 0 #7f0000, 0 5px 5px rgba(0,0,0,0.4); transition: all 0.1s ease-in-out; }
+    nav ul li a:hover { background: linear-gradient(to bottom, #e57373, #d32f2f); }
+    nav ul li a:active { transform: translateY(2px); box-shadow: 0 2px 0 #7f0000, 0 3px 3px rgba(0,0,0,0.4); }
+    .animated-warning, .spark-container, .content-section { text-align: center; max-width: 900px; margin: 40px auto; background: rgba(0, 0, 0, 0.6); padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+    .animated-warning { border: 2px solid #ffd700; animation: softPulse 6s infinite ease-in-out; }
+    .animated-warning p { font-family: 'Georgia', serif; font-size: 1.4em; font-weight: bold; color: #fffacd; text-shadow: 0 0 6px rgba(255, 215, 0, 0.7); margin: 0; line-height: 1.6; }
+    @keyframes softPulse { 0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); } 50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.7); } }
+    .spark-text { font-size: 1.5em; font-weight: bold; color: #ffd700; text-shadow: 0 0 10px #fff59d, 0 0 20px #fff176; animation: flicker 2s infinite; min-height: 80px; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease; padding: 0 20px; }
+    .spark-button { margin-top: 20px; padding: 10px 20px; background: #ff9800; color: #fff; font-weight: bold; border: none; border-radius: 25px; cursor: pointer; transition: background 0.3s; }
+    .spark-button:hover { background: #e65100; }
+    @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+    .comments-section { padding: 20px; margin-top: 30px; background-color: #f9f9f9; border-top: 1px solid #ddd; color: #333; }
+    .section-title { font-size: 2em; color: #ffd700; text-shadow: 1px 1px 2px #000; text-align: center; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Od Dna do Światła</h1>
+    <div class="scrolling-subtitle-container"><p class="special-subtitle">To miejsce dla ubrudzonych życiem – i dla tych, którzy szukają światła</p></div>
+  </header>
+  <nav><ul id="main-menu"><li>Ładowanie menu...</li></ul></nav>
+  <main>
+    <div class="animated-warning"><p>„Drodzy rodzice, jeśli wy zaniedbacie i nie nauczycie swoich dzieci, czym i po co są uczucia, jak je przeżywać i radzić sobie z nimi, zrobi to alkohol – bezlitośnie i bez skrupułów.”</p></div>
+    <div class="spark-container">
+      <div id="sparkText" class="spark-text">Ładowanie iskierki...</div>
+      <button class="spark-button" onclick="changeSpark()">💫 Daj kolejną iskrę</button>
+    </div>
+    <section id="gallery" class="content-section">
+      <h2 class="section-title">Galeria Światła</h2>
+      <div id="gallery-container" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;"></div>
+    </section>
+    <section id="playlist" class="content-section">
+        <h2 class="section-title">Playlista Nadziei</h2>
+        <div id="playlist-container" style="display: flex; flex-direction: column; gap: 10px; align-items: center;"></div>
+    </section>
+    <section id="comments" class="comments-section">
+      <h2>Podziel się swoją historią lub wesprzyj innych</h2>
+      <p>Twoje doświadczenie ma znaczenie. Anonimowo lub nie – każde słowo wsparcia jest bezcenne.</p>
+      <div id="disqus_thread"></div>
+    </section>
+  </main>
+  <audio autoplay loop controls><source src="jestes-moim-aniolem.mp3" type="audio/mpeg">Twoja przeglądarka nie obsługuje odtwarzacza audio.</audio>
+  <footer>
+    <p>© 2025 Od Dna do Światła</p>
+    <p>Autor: Chudy | Kontakt: Asatro@interia.pl</p>
+  </footer>
+  <script>window.onerror = function(msg) { document.body.innerHTML = `<div style="color:red; background:white; padding:20px;"><h1>Błąd krytyczny</h1><p>${msg}</p></div>`; }</script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script>
+    // BEZPIECZNA KONFIGURACJA
+    const firebaseConfig = {
+        apiKey: "%NEXT_PUBLIC_FIREBASE_API_KEY%",
+        authDomain: "%NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN%",
+        projectId: "%NEXT_PUBLIC_FIREBASE_PROJECT_ID%",
+        storageBucket: "%NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET%",
+        messagingSenderId: "%NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID%",
+        appId: "%NEXT_PUBLIC_FIREBASE_APP_ID%"
+    };
+
+    let db;
+    try {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+    } catch (e) {
+        console.error("Błąd inicjalizacji Firebase: ", e);
+        if(document.getElementById('main-menu')) document.getElementById('main-menu').innerHTML = '<li>Błąd</li>';
+    }
+  </script>
+  <script>
+    let sparks = [];
+    const sparkText = document.getElementById("sparkText");
+    const mainMenu = document.getElementById('main-menu');
+    function changeSpark() {
+      if (!sparks || sparks.length === 0) return;
+      let newSpark;
+      do { newSpark = sparks[Math.floor(Math.random() * sparks.length)]; } while (sparks.length > 1 && newSpark === sparkText.innerText);
+      sparkText.style.opacity = 0;
+      setTimeout(() => { sparkText.innerText = newSpark; sparkText.style.opacity = 1; }, 300);
+    }
+    async function initializePage() {
+        if (!db) { return; }
+        // Ładowanie menu
+        try {
+            const menuSnapshot = await db.collection('_sections').orderBy('name').get();
+            mainMenu.innerHTML = '';
+            menuSnapshot.forEach(doc => {
+                const section = doc.data();
+                mainMenu.innerHTML += `<li><a href="${section.slug}.html">${section.name}</a></li>`;
+            });
+        } catch (e) { console.error("Błąd ładowania menu:", e); mainMenu.innerHTML = '<li>Błąd menu</li>'; }
+        // Ładowanie iskierek
+        try {
+            const sparksSnapshot = await db.collection('iskierki').get();
+            sparks = sparksSnapshot.docs.map(doc => doc.data().content);
+            if(sparks.length > 0) { changeSpark(); setInterval(changeSpark, 30000); }
+            else { sparkText.innerText = "Brak iskierek w bazie."; }
+        } catch (e) { console.error("Błąd ładowania iskierek:", e); sparkText.innerText = "Błąd."; }
+        // Ładowanie Galerii
+        try {
+            const gallerySnapshot = await db.collection('gallery').orderBy('uploadedAt', 'desc').limit(12).get();
+            const galleryContainer = document.getElementById('gallery-container');
+            if (!gallerySnapshot.empty) {
+                gallerySnapshot.forEach(doc => {
+                    const photo = doc.data();
+                    const imgLink = document.createElement('a');
+                    imgLink.href = photo.url;
+                    imgLink.target = '_blank';
+                    imgLink.innerHTML = `<img src="${photo.url}" title="${photo.description || 'Zdjęcie z galerii'}" style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px; border: 3px solid #ffd700; cursor: pointer;">`;
+                    galleryContainer.appendChild(imgLink);
+                });
+            }
+        } catch (e) { console.error("Błąd ładowania galerii:", e); }
+        // Ładowanie Playlisty
+        try {
+            const playlistSnapshot = await db.collection('playlist').orderBy('addedAt', 'desc').limit(10).get();
+            const playlistContainer = document.getElementById('playlist-container');
+            if (!playlistSnapshot.empty) {
+                playlistSnapshot.forEach(doc => {
+                    const song = doc.data();
+                    const songLink = document.createElement('a');
+                    songLink.href = song.link;
+                    songLink.target = '_blank';
+                    songLink.textContent = song.title;
+                    songLink.style.color = '#ffc107';
+                    songLink.style.textDecoration = 'none';
+                    songLink.style.fontSize = '1.2em';
+                    playlistContainer.appendChild(songLink);
+                });
+            }
+        } catch (e) { console.error("Błąd ładowania playlisty:", e); }
+    }
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://od-dna-do-swiatla.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+    window.addEventListener('load', initializePage);
+  </script>
+</body>
+</html>
 
