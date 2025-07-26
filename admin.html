@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Administracyjny</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <div id="loginContainer" class="p-6 max-w-sm mx-auto mt-20 bg-white rounded shadow-lg">
+    <h2 class="text-2xl font-bold mb-5 text-center text-gray-700">Logowanie do Panelu</h2>
+    <input id="emailInput" type="email" placeholder="Email" class="border p-3 w-full mb-3 rounded" />
+    <input id="passwordInput" type="password" placeholder="Hasło" class="border p-3 w-full mb-5 rounded" />
+    <button id="loginBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-3 rounded w-full transition duration-300">Zaloguj się</button>
+    <p id="loginError" class="text-red-600 mt-3 text-center h-5"></p>
+  </div>
+
+  <div id="adminPanel" class="hidden">
+    <header class="bg-red-600 text-white p-4 text-center text-xl font-bold shadow flex justify-between items-center">
+      <span>Panel Administracyjny – Od Dna do Światła</span>
+      <button id="logoutBtn" class="bg-red-800 hover:bg-red-900 text-white font-bold px-4 py-2 rounded text-sm transition duration-300">Wyloguj</button>
+    </header>
+    <main class="p-6 space-y-12 max-w-4xl mx-auto">
+      
+      <section class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-2">Galeria Zdjęć</h2>
+        <p class="text-sm text-gray-600 mb-4">Najpierw wgraj zdjęcie do folderu 'galeria' na GitHubie, potem skopiuj jego link i wklej poniżej.</p>
+        <input type="text" id="galleryImageUrl" placeholder="Wklej tutaj link do zdjęcia z GitHuba" class="border p-2 w-full mb-2 rounded" />
+        <input type="text" id="galleryDesc" placeholder="Opis zdjęcia (opcjonalnie)" class="border p-2 w-full mb-2 rounded" />
+        <button id="addGalleryImageBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2 rounded transition duration-300">Dodaj zdjęcie do galerii</button>
+      </section>
+
+      <section class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Zarządzaj Sekcją "Gdzie Szukać Pomocy"</h2>
+        <div class="border-b pb-6 mb-6">
+          <h3 class="font-semibold mb-3 text-gray-700">Dodaj nowe miejsce pomocy</h3>
+          <select id="helpWojewodztwo" class="border p-2 w-full mb-2 rounded">
+            <option value="Ogólnopolska">Ogólnopolska</option>
+            <option value="Dolnośląskie">Dolnośląskie</option>
+            <option value="Kujawsko-Pomorskie">Kujawsko-Pomorskie</option>
+            <option value="Lubelskie">Lubelskie</option><option value="Lubuskie">Lubuskie</option><option value="Łódzkie">Łódzkie</option><option value="Małopolskie">Małopolskie</option><option value="Mazowieckie">Mazowieckie</option><option value="Opolskie">Opolskie</option><option value="Podkarpackie">Podkarpackie</option><option value="Podlaskie">Podlaskie</option><option value="Pomorskie">Pomorskie</option><option value="Śląskie">Śląskie</option><option value="Świętokrzyskie">Świętokrzyskie</option><option value="Warmińsko-Mazurskie">Warmińsko-Mazurskie</option><option value="Wielkopolskie">Wielkopolskie</option><option value="Zachodniopomorskie">Zachodniopomorskie</option>
+          </select>
+          <input type="text" id="helpName" placeholder="Nazwa miejsca" class="border p-2 w-full mb-2 rounded" />
+          <input type="text" id="helpAddress" placeholder="Adres (opcjonalnie)" class="border p-2 w-full mb-2 rounded" />
+          <input type="text" id="helpPhone" placeholder="Telefon (opcjonalnie)" class="border p-2 w-full mb-2 rounded" />
+          <input type="text" id="helpWebsite" placeholder="Strona WWW (opcjonalnie)" class="border p-2 w-full mb-2 rounded" />
+          <textarea id="helpDescription" rows="3" class="border p-2 w-full mb-2 rounded" placeholder="Krótki opis"></textarea>
+          <button id="addHelpPlaceBtn" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded transition duration-300">Dodaj Miejsce</button>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-3 text-gray-700">Istniejące miejsca</h3>
+          <div id="helpPlacesList" class="space-y-3"></div>
+        </div>
+      </section>
+
+      <section class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-2">Dodaj nową sekcję do menu</h2>
+        <input type="text" id="newSectionName" placeholder="Nazwa nowej sekcji" class="border p-2 w-full mb-2 rounded" />
+        <button id="addNewSectionBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded transition duration-300">Dodaj sekcję</button>
+      </section>
+      
+      <section class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-2">Dodaj wpis do istniejącej sekcji</h2>
+        <select id="sectionSelect" class="border p-2 w-full mb-2 rounded"></select>
+        <input type="text" id="entryTitle" placeholder="Tytuł (opcjonalnie)" class="border p-2 w-full mb-2 rounded" />
+        <textarea id="entryText" rows="6" class="border p-2 w-full mb-2 rounded" placeholder="Treść wpisu"></textarea>
+        <button id="addEntryBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-2 rounded transition duration-300">Dodaj wpis</button>
+      </section>
+      
+      <section class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-2">Edytuj wpisy i sekcje</h2>
+        <select id="editSectionSelect" class="border p-2 w-full mb-2 rounded"></select>
+        <div id="entriesList" class="space-y-3"></div>
+        <hr class="my-6">
+        <h3 class="font-semibold mb-3 text-gray-700">Zarządzaj sekcjami menu</h3>
+        <div id="menuEditor" class="space-y-2"></div>
+      </section>
+      
+      <section class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-2">Dodaj cytat do "Iskierki Nadziei"</h2>
+        <input type="text" id="sparkInput" placeholder="Nowy cytat / myśl" class="border p-2 w-full mb-2 rounded" />
+        <button id="addSparkBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-4 py-2 rounded transition duration-300">Dodaj</button>
+      </section>
+      
+      <section class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-2">Zarządzanie playlistą</h2>
+        <input type="text" id="songLink" placeholder="Link do piosenki (np. z YouTube)" class="border p-2 w-full mb-2 rounded" />
+        <input type="text" id="songTitle" placeholder="Tytuł piosenki" class="border p-2 w-full mb-2 rounded" />
+        <button id="addSongBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded transition duration-300">Dodaj do playlisty</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
